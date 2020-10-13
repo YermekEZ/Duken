@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "5299088565",
+    "firebase_url": "https://senior-project-ea18c.firebaseio.com",
+    "project_id": "senior-project-ea18c",
+    "storage_bucket": "senior-project-ea18c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:5299088565:android:2651176f88612bdecea2fc",
+        "android_client_info": {
+          "package_name": "com.example.dykenapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "5299088565-a29sa2ec0uh64e8g81p7i0fb007tg2q8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dykenapp",
+            "certificate_hash": "ae3756a61c35bb0a26b1e4c473a9533dbc50b8ae"
+          }
+        },
+        {
+          "client_id": "5299088565-s78kgbkcifluiurrtv38ddr7ktc11vs3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw3d_p7n6VyljOIoEp0IKBKZIPne5lExM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5299088565-s78kgbkcifluiurrtv38ddr7ktc11vs3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
