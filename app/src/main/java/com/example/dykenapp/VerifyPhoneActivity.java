@@ -31,6 +31,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private Button nextButton;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
         //getting mobile number from the previous activity
         //and sending the verification code to the number
-        String phoneNumber = getIntent().getStringExtra("phoneNumber");
+        phoneNumber = getIntent().getStringExtra("phoneNumber");
 
         sendVerificationCode(phoneNumber);
 
@@ -73,7 +74,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     //you can take the country id as user input as well
     private void sendVerificationCode(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+7" + phoneNumber,        // Phone number to verify
+                "+1" + phoneNumber,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 TaskExecutors.MAIN_THREAD,               // Activity (for callback binding)
@@ -121,6 +122,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
                             Intent intent = new Intent(VerifyPhoneActivity.this, ProfileActivity.class);
+                            intent.putExtra("phoneNumber", phoneNumber);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 

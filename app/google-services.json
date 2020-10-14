@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "5299088565-a29sa2ec0uh64e8g81p7i0fb007tg2q8.apps.googleusercontent.com",
+          "client_id": "5299088565-8e0d7c199jpc6h12pnn3qknhdqkeurjg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.dykenapp",
@@ -38,6 +38,13 @@
             {
               "client_id": "5299088565-s78kgbkcifluiurrtv38ddr7ktc11vs3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "5299088565-u4237rb100vpfb2coefdc72ct2ohbotd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.adiletaskerov.duken"
+              }
             }
           ]
         }
