@@ -13,12 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="624dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/epilogue_variable"
+        android:gravity="top"
+        android:lineSpacingExtra="6sp"
         android:text="@string/enterPhone"
-        android:textSize="29sp"
+        android:textColor="#37383D"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:translationY="-3.15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,17 +32,24 @@
 
     <Button
         android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="43dp"
         android:layout_marginStart="319dp"
         android:layout_marginEnd="21dp"
-        android:text="@string/nextButton"
+        android:layout_marginBottom="600dp"
+        android:width="35dp"
+        android:height="26dp"
         android:background="#0000"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/nextButton"
+        android:textColor="#A2AAC5"
+        android:translationY="-2.79sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
 
     <EditText
         android:id="@+id/editTextPhone"
@@ -48,11 +60,11 @@
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="528dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

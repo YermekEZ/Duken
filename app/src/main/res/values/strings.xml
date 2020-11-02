@@ -9,4 +9,5 @@
     <string name="yourSurname">Your surname</string>
     <string name="yourStateID">Your State ID</string>
     <string name="continueButton">Continue</string>
+    <string name="verifyCode">We have sent you a code on your number </string>
 </resources>

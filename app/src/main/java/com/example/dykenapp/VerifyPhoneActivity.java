@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +29,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private String mVerificationID;
 
     private EditText editTextCode;
+    private TextView textViewEnterCode;
     private Button nextButton;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
@@ -41,12 +43,15 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         editTextCode = findViewById(R.id.editTextCode);
+        textViewEnterCode = findViewById(R.id.textViewEnterCode);
 
 
         //getting mobile number from the previous activity
         //and sending the verification code to the number
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
+        //appending phoneNumber to textViewEnterCode
+        textViewEnterCode.append(" +7" + phoneNumber);
         sendVerificationCode(phoneNumber);
 
 
@@ -74,7 +79,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     //you can take the country id as user input as well
     private void sendVerificationCode(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+1" + phoneNumber,        // Phone number to verify
+                "+7" + phoneNumber,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 TaskExecutors.MAIN_THREAD,               // Activity (for callback binding)
