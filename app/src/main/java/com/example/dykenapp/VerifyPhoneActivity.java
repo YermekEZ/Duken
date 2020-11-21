@@ -51,7 +51,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
         //appending phoneNumber to textViewEnterCode
-        textViewEnterCode.append(" +7" + phoneNumber);
+        textViewEnterCode.append(phoneNumber);
         sendVerificationCode(phoneNumber);
 
 
@@ -79,7 +79,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     //you can take the country id as user input as well
     private void sendVerificationCode(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+7" + phoneNumber,        // Phone number to verify
+                phoneNumber,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 TaskExecutors.MAIN_THREAD,               // Activity (for callback binding)

@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E5E5E5"
-    tools:ignore="labelFor"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="labelFor">
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="72dp"
+        android:layout_height="43dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
+        android:width="35dp"
+        android:height="26dp"
+        android:background="#0000"
+        android:lineSpacingExtra="6sp"
+        android:text="@string/nextButton"
+        android:textColor="#A2AAC5"
+        android:translationY="-2.79sp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="624dp"
+        android:layout_below="@id/nextButton"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/epilogue_variable"
         android:gravity="top"
         android:lineSpacingExtra="6sp"
@@ -23,48 +38,18 @@
         android:textColor="#37383D"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:translationY="-3.15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.873" />
-
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="72dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="319dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginBottom="600dp"
-        android:width="35dp"
-        android:height="26dp"
-        android:background="#0000"
-        android:lineSpacingExtra="6sp"
-        android:text="@string/nextButton"
-        android:textColor="#A2AAC5"
-        android:translationY="-2.79sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
+        android:translationY="-3.15sp" />
 
     <EditText
         android:id="@+id/editTextPhone"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="228dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="528dp"
+        android:layout_below="@id/textView"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:importantForAutofill="no"
-        android:inputType="phone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:inputType="phone" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
