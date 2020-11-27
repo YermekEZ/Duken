@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -63,7 +62,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 mDatabaseReference.push().setValue(addDataOfUser);
 
-                Intent intent = new Intent(ProfileActivity.this, AddStore.class);
+                Intent intent = new Intent(ProfileActivity.this, AddStoreActivity.class);
+                intent.putExtra("phoneNumber", phoneNumber);
                 startActivity(intent);
             }
         });

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirstActivity">
+
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/welcome"
+        android:fontFamily="@font/epilogue_variable"
+        android:gravity="top"
+        android:lineSpacingExtra="6sp"
+        android:textColor="#37383D"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:translationY="-3.15sp"/>
+
+    <Button
+        android:id="@+id/signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeTextView"
+        android:layout_marginTop="72dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:backgroundTint="#1758FF"
+        android:textColor="#FFFFFF"
+        android:text="@string/signIn" />
+
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signIn"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:backgroundTint="#1758FF"
+        android:textColor="#FFFFFF"
+        android:text="@string/signUp" />
+</RelativeLayout>
