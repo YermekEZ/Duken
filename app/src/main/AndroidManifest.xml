@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dykenapp">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ScanActivity"></activity>
+        <activity android:name=".MyProfileActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".AddStoreActivity" />
         <activity android:name=".ProfileActivity" />

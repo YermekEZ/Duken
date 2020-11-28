@@ -7,11 +7,42 @@
     tools:context=".MainMenuActivity">
 
     <TextView
-        android:id="@+id/epta"
+        android:id="@+id/scanStatic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/epta"
-        android:layout_marginTop="150dp"
-        android:layout_centerHorizontal="true"
+        android:layout_above="@id/bottomNavigationView"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="24sp"
+        android:text="@string/scannedCode"
         />
+
+    <TextView
+        android:id="@+id/scanResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/scanStatic"
+        android:layout_above="@id/bottomNavigationView"
+        android:layout_marginBottom="32dp"
+        android:layout_marginLeft="8dp"
+        android:textSize="24sp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomNavigationView"
+        android:background="@color/bottomToolbar"
+        app:menu="@menu/bottom_navigation_menu"
+        />
+
+    <Button
+        android:id="@+id/scanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/scanResult"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/scanNow" />
+
 </RelativeLayout>

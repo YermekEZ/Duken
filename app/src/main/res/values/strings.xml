@@ -16,7 +16,9 @@
     <string name="welcome">Welcome to Duken</string>
     <string name="signIn">Sign in</string>
     <string name="signUp">Sign up</string>
-    <string name="epta">Main menu, epta!</string>
+    <string name="signOut">Sign out</string>
+    <string name="scannedCode">Scan result: </string>
+    <string name="scanNow">Scan</string>
     <string-array name="cities">
         <item>Nur-Sultan</item>
         <item>Almaty</item>
