@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    //private BottomNavigationView bottomNavigationView;
     private TextView scanResult;
     private Button scanButton;
 
@@ -37,7 +37,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         scanResult = findViewById(R.id.scanResult);
         scanButton = findViewById(R.id.scanButton);
 
@@ -49,7 +49,7 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        /*bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -65,7 +65,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });
+        });*/
 
     }
 

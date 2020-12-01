@@ -10,9 +10,9 @@
         android:id="@+id/scanStatic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bottomNavigationView"
-        android:layout_marginBottom="32dp"
-        android:layout_marginLeft="8dp"
+        android:layout_below="@id/topBar"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:textSize="24sp"
         android:text="@string/scannedCode"
         />
@@ -21,28 +21,63 @@
         android:id="@+id/scanResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/scanStatic"
-        android:layout_above="@id/bottomNavigationView"
-        android:layout_marginBottom="32dp"
-        android:layout_marginLeft="8dp"
+        android:layout_toEndOf="@id/scanStatic"
+        android:layout_below="@id/topBar"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:textSize="24sp"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <!--<com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:id="@+id/bottomNavigationView"
         android:background="@color/bottomToolbar"
         app:menu="@menu/bottom_navigation_menu"
-        />
+        /> -->
 
     <Button
         android:id="@+id/scanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/scanResult"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
+        android:layout_below="@id/scanResult"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="8dp"
         android:text="@string/scanNow" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topBar"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/topToolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:src="@drawable/ic_camera"
+                    android:background="@null"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="50"
+                    android:src="@drawable/ic_account_circle"
+                    android:background="@null"/>
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
 </RelativeLayout>
