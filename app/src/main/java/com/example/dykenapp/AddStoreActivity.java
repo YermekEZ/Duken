@@ -86,11 +86,11 @@ public class AddStoreActivity extends AppCompatActivity{
                 String address = mAddress.getEditText().getText().toString();
                 String city = selectedCity;
 
-                AddStoreData addData = new AddStoreData(phoneNumber, IIN, legalName, address, city);
+                AddStoreData addData = new AddStoreData(IIN, legalName, address, city);
 
-                mDatabaseReference.push().setValue(addData);
+                mDatabaseReference.child(phoneNumber).setValue(addData);
 
-                Intent intent = new Intent(AddStoreActivity.this, MainMenuActivity.class);
+                Intent intent = new Intent(AddStoreActivity.this, AddProductActivity.class);
                 startActivity(intent);
             }
         });

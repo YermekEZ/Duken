@@ -2,26 +2,17 @@ package com.example.dykenapp;
 
 public class AddStoreData {
 
-    private String mPhoneNumber, mIIN, mLegalName, mCity, mAddress;
+    private String mIIN, mLegalName, mCity, mAddress;
 
     public AddStoreData() {
 
     }
 
-    public AddStoreData(String mPhoneNumber, String mIIN, String mLegalName, String mCity, String mAddress) {
-        this.mPhoneNumber = mPhoneNumber;
+    public AddStoreData(String mIIN, String mLegalName, String mCity, String mAddress) {
         this.mIIN = mIIN;
         this.mLegalName = mLegalName;
         this.mCity = mCity;
         this.mAddress = mAddress;
-    }
-
-    public String getmPhoneNumber() {
-        return mPhoneNumber;
-    }
-
-    public void setmPhoneNumber(String mPhoneNumber) {
-        this.mPhoneNumber = mPhoneNumber;
     }
 
     public String getmIIN() {

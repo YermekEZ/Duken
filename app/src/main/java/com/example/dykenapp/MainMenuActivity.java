@@ -15,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -23,14 +24,24 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 
 public class MainMenuActivity extends AppCompatActivity {
 
     //private BottomNavigationView bottomNavigationView;
-    private TextView scanResult;
+    private TextView scanResult, productResult;
     private Button scanButton;
+    private ImageButton addImageButton, scanImageButton;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private String barcodeValue, productValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +50,10 @@ public class MainMenuActivity extends AppCompatActivity {
 
         //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         scanResult = findViewById(R.id.scanResult);
+        productResult = findViewById(R.id.productResult);
         scanButton = findViewById(R.id.scanButton);
+        addImageButton = findViewById(R.id.addImageButton);
+        scanImageButton = findViewById(R.id.scanImageButton);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,10 +63,17 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        addImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            }
+        });
+
         /*bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch (item.getItemId()) {
                     case R.id.scan:
                         Intent intent = new Intent(MainMenuActivity.this, MainMenuActivity.class);
@@ -69,12 +90,38 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
+    private void readName(String barcodeNumber) {
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference("products");
+
+        mDatabaseReference.orderByChild("mScannedNumber").equalTo(barcodeNumber).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot mScannedNumber: snapshot.getChildren()) {
+                    ProductDetails productDetails = mScannedNumber.getValue(ProductDetails.class);
+                    barcodeValue = productDetails.getBarcodeNumber();
+                    productValue = productDetails.getProductName();
+                }
+                scanResult = findViewById(R.id.scanResult);
+                productResult = findViewById(R.id.productResult);
+                scanResult.setText(barcodeValue);
+                productResult.setText(productValue);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == 0) {
             if(resultCode == CommonStatusCodes.SUCCESS) {
                 if(data != null) {
                     Barcode barcode = data.getParcelableExtra("scannedCode");
-                    scanResult.setText(barcode.displayValue);
+                    //scanResult.setText(barcode.displayValue);
+                    readName(barcode.displayValue);
                 } else {
                     scanResult.setText("No code found");
                 }

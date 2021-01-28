@@ -27,6 +27,27 @@
         android:layout_marginTop="16dp"
         android:textSize="24sp"/>
 
+    <TextView
+        android:id="@+id/productName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scanStatic"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:text="@string/productName2"
+        />
+
+    <TextView
+        android:id="@+id/productResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/productName"
+        android:layout_below="@id/scanResult"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"/>
+
     <!--<com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +61,7 @@
         android:id="@+id/scanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/scanResult"
+        android:layout_below="@id/productName"
         android:layout_marginTop="32dp"
         android:layout_marginStart="8dp"
         android:text="@string/scanNow" />
@@ -49,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/topBar"
-        >
+        android:backgroundTint="@color/colorPrimaryDark">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -67,14 +88,16 @@
                     android:layout_height="match_parent"
                     android:layout_weight="50"
                     android:src="@drawable/ic_camera"
-                    android:background="@null"/>
+                    android:background="@null"
+                    android:id="@+id/scanImageButton"/>
 
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="50"
-                    android:src="@drawable/ic_account_circle"
-                    android:background="@null"/>
+                    android:src="@drawable/ic_add"
+                    android:background="@null"
+                    android:id="@+id/addImageButton"/>
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>

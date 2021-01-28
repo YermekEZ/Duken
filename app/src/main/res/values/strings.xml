@@ -19,10 +19,17 @@
     <string name="signOut">Sign out</string>
     <string name="scannedCode">Scan result: </string>
     <string name="scanNow">Scan</string>
+    <string name="addProduct">Add product</string>
+    <string name="productName">Product name</string>
+    <string name="save">Save</string>
+    <string name="scannedNumber">Scanned number</string>
+    <string name="productName2">Product name:</string>
     <string-array name="cities">
         <item>Nur-Sultan</item>
         <item>Almaty</item>
         <item>Semey</item>
         <item>Oskemen</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

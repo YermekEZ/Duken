@@ -58,9 +58,9 @@ public class ProfileActivity extends AppCompatActivity {
                 String surname = mSurname.getEditText().getText().toString();
                 String stateID = mStateID.getEditText().getText().toString();
 
-                AddProfileData addDataOfUser = new AddProfileData(name, surname, stateID, phoneNumber);
+                AddProfileData addDataOfUser = new AddProfileData(name, surname, stateID);
 
-                mDatabaseReference.push().setValue(addDataOfUser);
+                mDatabaseReference.child(phoneNumber).setValue(addDataOfUser);
 
                 Intent intent = new Intent(ProfileActivity.this, AddStoreActivity.class);
                 intent.putExtra("phoneNumber", phoneNumber);
