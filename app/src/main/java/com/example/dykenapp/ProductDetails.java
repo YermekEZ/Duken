@@ -2,30 +2,31 @@ package com.example.dykenapp;
 
 public class ProductDetails {
 
-    private String barcodeNumber, productName;
+    String mProductName, mSuccess;
 
     public ProductDetails() {
 
     }
 
-    public ProductDetails(String barcodeNumber, String productName) {
-        this.barcodeNumber = barcodeNumber;
-        this.productName = productName;
+    public ProductDetails(String mProductName, String mSuccess) {
+        this.mProductName = mProductName;
+        this.mSuccess = mSuccess;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getmProductName() {
+        return mProductName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setmProductName(String mProductName) {
+        this.mProductName = mProductName;
     }
 
-    public String getBarcodeNumber() {
-        return barcodeNumber;
+    public String getmSuccess() {
+        return mSuccess;
     }
 
-    public void setBarcodeNumber(String barcodeNumber) {
-        this.barcodeNumber = barcodeNumber;
+    public void setmSuccess(String mSuccess) {
+        this.mSuccess = mSuccess;
     }
+
 }

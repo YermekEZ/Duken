@@ -50,7 +50,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         scanResult = findViewById(R.id.scanResult);
-        productResult = findViewById(R.id.productResult);
+        productResult = findViewById(R.id.productResultMain);
         scanButton = findViewById(R.id.scanButton);
         addImageButton = findViewById(R.id.addImageButton);
         scanImageButton = findViewById(R.id.scanImageButton);
@@ -90,22 +90,16 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
-    private void readName(String barcodeNumber) {
+    public void readName(final String barcodeNumber) {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference("products");
+        mDatabaseReference = mFirebaseDatabase.getReference().child("products");
 
-        mDatabaseReference.orderByChild("mScannedNumber").equalTo(barcodeNumber).addValueEventListener(new ValueEventListener() {
+        mDatabaseReference.child(barcodeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot mScannedNumber: snapshot.getChildren()) {
-                    ProductDetails productDetails = mScannedNumber.getValue(ProductDetails.class);
-                    barcodeValue = productDetails.getBarcodeNumber();
-                    productValue = productDetails.getProductName();
-                }
-                scanResult = findViewById(R.id.scanResult);
-                productResult = findViewById(R.id.productResult);
-                scanResult.setText(barcodeValue);
-                productResult.setText(productValue);
+                ProductDetails productDetails = snapshot.getValue(ProductDetails.class);
+                String mProductName = productDetails.getmProductName();
+                productResult.setText(mProductName);
             }
 
             @Override
@@ -120,8 +114,9 @@ public class MainMenuActivity extends AppCompatActivity {
             if(resultCode == CommonStatusCodes.SUCCESS) {
                 if(data != null) {
                     Barcode barcode = data.getParcelableExtra("scannedCode");
-                    //scanResult.setText(barcode.displayValue);
-                    readName(barcode.displayValue);
+                    String details = barcode.displayValue;
+                    scanResult.setText(details);
+                    readName(details);
                 } else {
                     scanResult.setText("No code found");
                 }

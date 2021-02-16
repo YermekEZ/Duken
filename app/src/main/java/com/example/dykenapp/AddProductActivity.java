@@ -68,8 +68,9 @@ public class AddProductActivity extends AppCompatActivity {
 
                 String productName = mProductName.getEditText().getText().toString();
                 String scannedNumber = mScanResult.getEditText().getText().toString();
+                String success = "OK!";
 
-                AddProductData addData = new AddProductData(productName);
+                AddProductData addData = new AddProductData(productName, success);
 
                 mDatabaseReference.child(scannedNumber).setValue(addData);
 
