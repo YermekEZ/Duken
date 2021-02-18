@@ -24,6 +24,8 @@
     <string name="save">Save</string>
     <string name="scannedNumber">Scanned number</string>
     <string name="productName2">Product name:</string>
+    <string name="productDescription">Product description</string>
+    <string name="productDescription2">Product description:</string>
     <string-array name="cities">
         <item>Nur-Sultan</item>
         <item>Almaty</item>

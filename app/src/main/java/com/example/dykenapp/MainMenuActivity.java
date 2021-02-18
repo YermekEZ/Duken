@@ -36,7 +36,7 @@ import java.io.IOException;
 public class MainMenuActivity extends AppCompatActivity {
 
     //private BottomNavigationView bottomNavigationView;
-    private TextView scanResult, productResult;
+    private TextView scanResult, productResult, productDescriptionResult;
     private Button scanButton;
     private ImageButton addImageButton, scanImageButton;
     private FirebaseDatabase mFirebaseDatabase;
@@ -51,6 +51,7 @@ public class MainMenuActivity extends AppCompatActivity {
         //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         scanResult = findViewById(R.id.scanResult);
         productResult = findViewById(R.id.productResultMain);
+        productDescriptionResult = findViewById(R.id.productDescriptionResult);
         scanButton = findViewById(R.id.scanButton);
         addImageButton = findViewById(R.id.addImageButton);
         scanImageButton = findViewById(R.id.scanImageButton);
@@ -97,9 +98,11 @@ public class MainMenuActivity extends AppCompatActivity {
         mDatabaseReference.child(barcodeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ProductDetails productDetails = snapshot.getValue(ProductDetails.class);
-                String mProductName = productDetails.getmProductName();
+                ProductData productData = snapshot.getValue(ProductData.class);
+                String mProductName = productData.getmProductName();
                 productResult.setText(mProductName);
+                String mProductDescription = productData.getmProductDescription();
+                productDescriptionResult.setText(mProductDescription);
             }
 
             @Override

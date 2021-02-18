@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -23,8 +22,8 @@ public class AddProductActivity extends AppCompatActivity {
 
     private ImageButton scanImageButton, scan;
     private Button saveButton;
-    private TextInputLayout mProductName, mScanResult;
-    private TextInputEditText productName, scanResult;
+    private TextInputLayout mProductName, mScanResult, mProductDescription;
+    private TextInputEditText productName, scanResult, productDescription;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
@@ -38,8 +37,10 @@ public class AddProductActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         mProductName = findViewById(R.id.productName);
         mScanResult = findViewById(R.id.scanResult);
+        mProductDescription = findViewById(R.id.productDescription);
         productName = findViewById(R.id.productNameEditText);
         scanResult = findViewById(R.id.scanResultEditText);
+        productDescription = findViewById(R.id.productDescriptionEditText);
 
         saveButton.setBackgroundResource(R.color.activeButton);
         saveButton.setTextColor(Color.parseColor("#FFFFFF"));
@@ -68,14 +69,15 @@ public class AddProductActivity extends AppCompatActivity {
 
                 String productName = mProductName.getEditText().getText().toString();
                 String scannedNumber = mScanResult.getEditText().getText().toString();
-                String success = "OK!";
+                String productDescription = mProductDescription.getEditText().getText().toString();
 
-                AddProductData addData = new AddProductData(productName, success);
+                ProductData addData = new ProductData(productName, productDescription);
 
                 mDatabaseReference.child(scannedNumber).setValue(addData);
 
                 Toast.makeText(getApplicationContext(), "Data have been saved successfully!", Toast.LENGTH_SHORT).show();
                 mProductName.getEditText().getText().clear();
+                mProductDescription.getEditText().getText().clear();
                 mScanResult.getEditText().getText().clear();
             }
         });
