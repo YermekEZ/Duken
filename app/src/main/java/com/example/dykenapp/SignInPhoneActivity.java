@@ -65,7 +65,7 @@ public class SignInPhoneActivity extends AppCompatActivity {
                             intent.putExtra("phoneNumber", phoneNumber);
                             startActivity(intent);
                         } else {
-                            errorMessage.setText("Invalid phone number");
+                            editTextPhoneNumber.setError("Invalid phone number");
                         }
                     }
 

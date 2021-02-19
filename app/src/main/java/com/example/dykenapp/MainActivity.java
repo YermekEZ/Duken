@@ -1,5 +1,6 @@
 package com.example.dykenapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,8 +13,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -21,10 +25,12 @@ public class MainActivity extends AppCompatActivity{
     private TextView textView;
 
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMessagesDatabaseReference;
+    private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +48,44 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View view) {
-                //mFirebaseDatabase = FirebaseDatabase.getInstance();
-                String phoneNumber = editTextPhoneNumber.getText().toString();
 
-                /*if(phoneNumber.isEmpty() || phoneNumber.length() < 10){
-                    editTextPhoneNumber.setError("Invalid phone number");
-                    editTextPhoneNumber.requestFocus();
-                    return;
-                }*/
+                phoneNumber = editTextPhoneNumber.getText().toString();
 
-                Intent intent = new Intent(MainActivity.this, VerifyPhoneActivity.class);
-                intent.putExtra("phoneNumber", phoneNumber);
-                startActivity(intent);
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(phoneNumber);
+
+                mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists() && phoneNumber.length() > 0) {
+                            editTextPhoneNumber.setError("This phone number is already registered.");
+                            editTextPhoneNumber.requestFocus();
+                            return;
+                        } else if(isValid(phoneNumber) == true){
+                            Intent intent = new Intent(MainActivity.this, VerifyPhoneActivity.class);
+                            intent.putExtra("phoneNumber", phoneNumber);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
 
+    }
+
+    private boolean isValid(String phoneNumber){
+        if(phoneNumber.isEmpty() || phoneNumber.length() < 12){
+            editTextPhoneNumber.setError("Invalid phone number");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /*protected void onStart() {
