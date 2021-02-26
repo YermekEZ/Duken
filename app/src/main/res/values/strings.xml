@@ -26,6 +26,10 @@
     <string name="productName2">Product name:</string>
     <string name="productDescription">Product description</string>
     <string name="productDescription2">Product description:</string>
+    <string name="name">Name</string>
+    <string name="findProduct">Find product</string>
+    <string name="find">Find</string>
+    <string name="profile">My Profile</string>
     <string-array name="cities">
         <item>Nur-Sultan</item>
         <item>Almaty</item>

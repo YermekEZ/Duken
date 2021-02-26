@@ -7,13 +7,25 @@
     tools:context=".MainMenuActivity">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/findTextView"
+        android:text="@string/findProduct"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="23dp"
+        android:textSize="18sp"
+        android:textColor="#201E1E"/>
+
+    <TextView
         android:id="@+id/scanStatic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topBar"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:layout_below="@id/findTextView"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="23dp"
+        android:textSize="16sp"
+        android:textColor="#201E1E"
+        android:fontFamily="@font/montserrat_alternates_medium"
         android:text="@string/scannedCode"
         />
 
@@ -22,19 +34,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/scanStatic"
-        android:layout_below="@id/topBar"
+        android:layout_below="@id/findTextView"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textSize="24sp"/>
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/scanStatic"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="23dp"
+        android:textSize="16sp"
+        android:textColor="#201E1E"
+        android:fontFamily="@font/montserrat_alternates_medium"
         android:text="@string/productName2"
         />
 
@@ -45,17 +59,19 @@
         android:layout_toEndOf="@id/productName"
         android:layout_below="@id/scanResult"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textSize="24sp"/>
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/productDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/productName"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="23dp"
+        android:textSize="16sp"
+        android:textColor="#201E1E"
+        android:fontFamily="@font/montserrat_alternates_medium"
         android:text="@string/productDescription2"
         />
 
@@ -63,11 +79,10 @@
         android:id="@+id/productDescriptionResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/productDescription"
-        android:layout_below="@id/productName"
-        android:layout_marginStart="8dp"
+        android:layout_below="@id/productDescription"
+        android:layout_marginStart="23dp"
         android:layout_marginTop="16dp"
-        android:textSize="24sp"/>
+        android:textSize="16sp"/>
 
     <!--<com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -82,14 +97,19 @@
         android:id="@+id/scanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/productDescription"
+        android:layout_below="@id/productDescriptionResult"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/scanNow" />
+        android:backgroundTint="#1D59F5"
+        android:text="@string/find"
+        android:textAllCaps="false"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:textColor="#FFFFFF"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:id="@+id/topBar"
         android:backgroundTint="@color/colorPrimaryDark">
 
@@ -107,18 +127,26 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
-                    android:src="@drawable/ic_camera"
+                    android:layout_weight="33"
+                    android:src="@drawable/ic_search"
                     android:background="@null"
-                    android:id="@+id/scanImageButton"/>
+                    android:id="@+id/searchImageButton"/>
 
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="50"
+                    android:layout_weight="33"
                     android:src="@drawable/ic_add"
                     android:background="@null"
                     android:id="@+id/addImageButton"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="33"
+                    android:src="@drawable/ic_account_circle"
+                    android:background="@null"
+                    android:id="@+id/myProfileImageButton"/>
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>

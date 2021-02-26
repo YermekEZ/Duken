@@ -35,6 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/IINEditText"
+            android:textSize="17sp"
+            android:fontFamily="@font/roboto_medium"
             android:hint="@string/IIN" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,6 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/legalNameEditText"
+            android:textSize="17sp"
+            android:fontFamily="@font/roboto_medium"
             android:hint="@string/legalName" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +81,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/addressEditText"
+            android:textSize="17sp"
+            android:fontFamily="@font/roboto_medium"
             android:hint="@string/address" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,9 +91,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/address"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto_medium"
+        android:lineSpacingExtra="6sp"
+        android:translationY="-2.79sp"
         android:layout_marginTop="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:textSize="17sp"
         android:text="@string/continueButton" />
 
 </RelativeLayout>

@@ -19,6 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/nameEditText"
+            android:textSize="17sp"
+            android:fontFamily="@font/roboto_medium"
             android:hint="@string/yourName" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,9 +45,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/stateID"
+        android:textAllCaps="false"
         android:layout_marginTop="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:textSize="17sp"
+        android:lineSpacingExtra="6sp"
+        android:translationY="-2.79sp"
         android:text="@string/continueButton" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -61,6 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/surnameEditText"
+            android:textSize="17sp"
+            android:fontFamily="@font/roboto_medium"
             android:hint="@string/yourSurname" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,6 +85,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/stateIDEditText"
+                android:textSize="17sp"
+                android:fontFamily="@font/roboto_medium"
                 android:hint="@string/yourStateID" />
         </com.google.android.material.textfield.TextInputLayout>
 

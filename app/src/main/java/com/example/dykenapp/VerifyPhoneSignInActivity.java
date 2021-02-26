@@ -125,6 +125,7 @@ public class VerifyPhoneSignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
+                            SharedData.phoneNumber = phoneNumber;
                             Intent intent = new Intent(VerifyPhoneSignInActivity.this, AddProductActivity.class);
                             intent.putExtra("phoneNumber", phoneNumber);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

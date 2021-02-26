@@ -38,7 +38,7 @@ public class MainMenuActivity extends AppCompatActivity {
     //private BottomNavigationView bottomNavigationView;
     private TextView scanResult, productResult, productDescriptionResult;
     private Button scanButton;
-    private ImageButton addImageButton, scanImageButton;
+    private ImageButton addImageButton, searchImageButton, myProfileImageButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private String barcodeValue, productValue;
@@ -54,7 +54,8 @@ public class MainMenuActivity extends AppCompatActivity {
         productDescriptionResult = findViewById(R.id.productDescriptionResult);
         scanButton = findViewById(R.id.scanButton);
         addImageButton = findViewById(R.id.addImageButton);
-        scanImageButton = findViewById(R.id.scanImageButton);
+        searchImageButton = findViewById(R.id.searchImageButton);
+        myProfileImageButton = findViewById(R.id.myProfileImageButton);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,14 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainMenuActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        myProfileImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuActivity.this, MyProfileActivity.class);
                 startActivity(intent);
             }
         });

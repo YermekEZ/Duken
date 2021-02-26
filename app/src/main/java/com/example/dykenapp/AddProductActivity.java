@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddProductActivity extends AppCompatActivity {
 
-    private ImageButton scanImageButton, scan;
+    private ImageButton searchImageButton, myProfileImageButton, scan;
     private Button saveButton;
     private TextInputLayout mProductName, mScanResult, mProductDescription;
     private TextInputEditText productName, scanResult, productDescription;
@@ -32,7 +32,8 @@ public class AddProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
 
-        scanImageButton = findViewById(R.id.scanImageButton);
+        searchImageButton = findViewById(R.id.scanImageButton);
+        myProfileImageButton = findViewById(R.id.myProfileImageButton);
         scan = findViewById(R.id.scan);
         saveButton = findViewById(R.id.saveButton);
         mProductName = findViewById(R.id.productName);
@@ -53,10 +54,18 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
 
-        scanImageButton.setOnClickListener(new View.OnClickListener() {
+        searchImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddProductActivity.this, MainMenuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        myProfileImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddProductActivity.this, MyProfileActivity.class);
                 startActivity(intent);
             }
         });

@@ -9,28 +9,82 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/yourNameTextView"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:text="@string/yourName"
-        android:textSize="20sp"
+        android:id="@+id/myProfileTextView"
+        android:text="@string/profile"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="23dp"
+        android:textSize="18sp"
+        android:textColor="#201E1E"
     />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profileDetails"
+        android:layout_below="@id/myProfileTextView"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="23dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/signOutButton"
         android:text="@string/signOut"
-        android:layout_below="@id/yourNameTextView"
+        android:layout_below="@id/profileDetails"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        android:backgroundTint="#1D59F5"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:layout_centerHorizontal="true"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/bottomNavigationView"
-        android:background="@color/bottomToolbar"
-        app:menu="@menu/bottom_navigation_menu"
-        />
+        android:id="@+id/topBar"
+        android:backgroundTint="@color/colorPrimaryDark">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/topToolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="33"
+                    android:src="@drawable/ic_search"
+                    android:background="@null"
+                    android:id="@+id/searchImageButton"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="33"
+                    android:src="@drawable/ic_add"
+                    android:background="@null"
+                    android:id="@+id/addImageButton"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="33"
+                    android:src="@drawable/ic_account_circle"
+                    android:background="@null"
+                    android:id="@+id/myProfileImageButton"/>
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
 </RelativeLayout>
