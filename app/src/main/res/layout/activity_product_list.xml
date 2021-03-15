@@ -4,42 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyProfileActivity">
+    tools:context=".ProductListActivity">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/myProfileTextView"
-        android:text="@string/profile"
-        android:fontFamily="@font/montserrat_alternates_medium"
-        android:layout_marginTop="20dp"
+        android:id="@+id/listTextView"
+        android:layout_marginTop="35dp"
         android:layout_marginStart="23dp"
-        android:textSize="18sp"
-        android:textColor="#201E1E"
-    />
+        android:text="@string/list"
+        android:textSize="36sp"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:textColor="#201E1E"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/profileDetails"
-        android:layout_below="@id/myProfileTextView"
-        android:textSize="16sp"
+        android:id="@+id/numberOfProductsTextView"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/listTextView"
+        android:textSize="12sp"
         android:fontFamily="@font/montserrat_alternates_medium"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="23dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/signOutButton"
-        android:text="@string/signOut"
-        android:layout_below="@id/profileDetails"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#1D59F5"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="false"
-        android:fontFamily="@font/montserrat_alternates_medium"
-        android:layout_centerHorizontal="true"/>
+        android:textAllCaps="true"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -94,5 +81,15 @@
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="80dp"
+        android:layout_below="@+id/numberOfProductsTextView"/>
 
 </RelativeLayout>

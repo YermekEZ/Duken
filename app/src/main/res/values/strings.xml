@@ -30,6 +30,11 @@
     <string name="findProduct">Find product</string>
     <string name="find">Find</string>
     <string name="profile">My Profile</string>
+    <string name="list">List</string>
+    <string name="price">Price ($)</string>
+    <string name="pieces">Pieces</string>
+    <string name="price2">Price ($):</string>
+    <string name="inStock">In stock:</string>
     <string-array name="cities">
         <item>Nur-Sultan</item>
         <item>Almaty</item>

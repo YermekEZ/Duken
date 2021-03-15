@@ -36,7 +36,7 @@ import java.io.IOException;
 public class MainMenuActivity extends AppCompatActivity {
 
     //private BottomNavigationView bottomNavigationView;
-    private TextView scanResult, productResult, productDescriptionResult;
+    private TextView scanResult, productNameResult, priceResult, inStockResult;
     private Button scanButton;
     private ImageButton addImageButton, searchImageButton, myProfileImageButton;
     private FirebaseDatabase mFirebaseDatabase;
@@ -50,8 +50,9 @@ public class MainMenuActivity extends AppCompatActivity {
 
         //bottomNavigationView = findViewById(R.id.bottomNavigationView);
         scanResult = findViewById(R.id.scanResult);
-        productResult = findViewById(R.id.productResultMain);
-        productDescriptionResult = findViewById(R.id.productDescriptionResult);
+        productNameResult = findViewById(R.id.productNameResult);
+        priceResult = findViewById(R.id.priceResult);
+        inStockResult = findViewById(R.id.inStockResult);
         scanButton = findViewById(R.id.scanButton);
         addImageButton = findViewById(R.id.addImageButton);
         searchImageButton = findViewById(R.id.searchImageButton);
@@ -104,14 +105,16 @@ public class MainMenuActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("products");
 
-        mDatabaseReference.child(barcodeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabaseReference.child(SharedData.getPhoneNumber()).child(barcodeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ProductData productData = snapshot.getValue(ProductData.class);
                 String mProductName = productData.getmProductName();
-                productResult.setText(mProductName);
-                String mProductDescription = productData.getmProductDescription();
-                productDescriptionResult.setText(mProductDescription);
+                productNameResult.setText(mProductName);
+                String mPrice = productData.getmPrice();
+                priceResult.setText(mPrice);
+                String mInStock = productData.getmPieces();
+                inStockResult.setText(mInStock);
             }
 
             @Override

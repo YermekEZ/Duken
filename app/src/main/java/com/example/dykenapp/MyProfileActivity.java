@@ -26,7 +26,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
     private TextView profileDetailsTextView;
     private Button signOutButton;
-    private ImageButton searchImageButton, addImageButton;
+    private ImageButton listImageButton, searchImageButton, addImageButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
@@ -39,6 +39,7 @@ public class MyProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_profile);
 
         profileDetailsTextView = findViewById(R.id.profileDetails);
+        listImageButton = findViewById(R.id.listImageButton);
         signOutButton = findViewById(R.id.signOutButton);
         searchImageButton = findViewById(R.id.searchImageButton);
         addImageButton = findViewById(R.id.addImageButton);
@@ -78,6 +79,14 @@ public class MyProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mFirebaseAuth.signOut();
+            }
+        });
+
+        listImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyProfileActivity.this, ProductListActivity.class);
+                startActivity(intent);
             }
         });
 

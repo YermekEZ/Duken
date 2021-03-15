@@ -22,8 +22,8 @@ public class AddProductActivity extends AppCompatActivity {
 
     private ImageButton searchImageButton, myProfileImageButton, scan;
     private Button saveButton;
-    private TextInputLayout mProductName, mScanResult, mProductDescription;
-    private TextInputEditText productName, scanResult, productDescription;
+    private TextInputLayout mProductName, mScanResult, mPrice, mPieces;
+    private TextInputEditText productName, scanResult, price, pieces;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
@@ -38,10 +38,12 @@ public class AddProductActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.saveButton);
         mProductName = findViewById(R.id.productName);
         mScanResult = findViewById(R.id.scanResult);
-        mProductDescription = findViewById(R.id.productDescription);
+        mPrice = findViewById(R.id.price);
+        mPieces = findViewById(R.id.pieces);
         productName = findViewById(R.id.productNameEditText);
         scanResult = findViewById(R.id.scanResultEditText);
-        productDescription = findViewById(R.id.productDescriptionEditText);
+        price = findViewById(R.id.priceEditText);
+        pieces = findViewById(R.id.piecesEditText);
 
         saveButton.setBackgroundResource(R.color.activeButton);
         saveButton.setTextColor(Color.parseColor("#FFFFFF"));
@@ -78,16 +80,18 @@ public class AddProductActivity extends AppCompatActivity {
 
                 String productName = mProductName.getEditText().getText().toString();
                 String scannedNumber = mScanResult.getEditText().getText().toString();
-                String productDescription = mProductDescription.getEditText().getText().toString();
+                String price = mPrice.getEditText().getText().toString();
+                String pieces = mPieces.getEditText().getText().toString();
 
-                ProductData addData = new ProductData(productName, productDescription);
+                ProductData addData = new ProductData(productName, scannedNumber, price, pieces);
 
-                mDatabaseReference.child(scannedNumber).setValue(addData);
+                mDatabaseReference.child(SharedData.getPhoneNumber()).child(scannedNumber).setValue(addData);
 
                 Toast.makeText(getApplicationContext(), "Data have been saved successfully!", Toast.LENGTH_SHORT).show();
                 mProductName.getEditText().getText().clear();
-                mProductDescription.getEditText().getText().clear();
+                mPrice.getEditText().getText().clear();
                 mScanResult.getEditText().getText().clear();
+                mPieces.getEditText().getText().clear();
             }
         });
     }

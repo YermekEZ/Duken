@@ -2,15 +2,17 @@ package com.example.dykenapp;
 
 public class ProductData {
 
-    private String mProductName, mProductDescription;
+    private String mProductName, mBarcodeNumber, mPrice, mPieces;
 
     public ProductData() {
 
     }
 
-    public ProductData(String mProductName, String mProductDescription) {
+    public ProductData(String mProductName, String mBarcodeNumber, String mPrice, String mPieces) {
         this.mProductName = mProductName;
-        this.mProductDescription = mProductDescription;
+        this.mBarcodeNumber = mBarcodeNumber;
+        this.mPrice = mPrice;
+        this.mPieces = mPieces;
     }
 
     public String getmProductName() {
@@ -21,12 +23,28 @@ public class ProductData {
         this.mProductName = mProductName;
     }
 
-    public String getmProductDescription() {
-        return mProductDescription;
+    public String getmBarcodeNumber() {
+        return mBarcodeNumber;
     }
 
-    public void setmProductDescription(String mProductDescription) {
-        this.mProductDescription = mProductDescription;
+    public void setmBarcodeNumber(String mBarcodeNumber) {
+        this.mBarcodeNumber = mBarcodeNumber;
+    }
+
+    public String getmPrice() {
+        return mPrice;
+    }
+
+    public void setmPrice(String mPrice) {
+        this.mPrice = mPrice;
+    }
+
+    public String getmPieces() {
+        return mPieces;
+    }
+
+    public void setmPieces(String mPieces) {
+        this.mPieces = mPieces;
     }
 
 }
