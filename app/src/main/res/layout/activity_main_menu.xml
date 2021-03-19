@@ -82,7 +82,7 @@
         android:layout_toEndOf="@+id/price"
         android:layout_below="@+id/productNameResult"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:textSize="16sp"/>
 
     <TextView
@@ -105,7 +105,7 @@
         android:layout_toEndOf="@+id/inStock"
         android:layout_below="@+id/priceResult"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:textSize="16sp"/>
 
     <!--<com.google.android.material.bottomnavigation.BottomNavigationView
@@ -151,7 +151,15 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="33"
+                    android:layout_weight="25"
+                    android:src="@drawable/ic_list"
+                    android:background="@null"
+                    android:id="@+id/listImageButton"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"
                     android:src="@drawable/ic_search"
                     android:background="@null"
                     android:id="@+id/searchImageButton"/>
@@ -159,7 +167,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="33"
+                    android:layout_weight="25"
                     android:src="@drawable/ic_add"
                     android:background="@null"
                     android:id="@+id/addImageButton"/>
@@ -167,7 +175,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="33"
+                    android:layout_weight="25"
                     android:src="@drawable/ic_account_circle"
                     android:background="@null"
                     android:id="@+id/myProfileImageButton"/>
