@@ -37,6 +37,7 @@
     <string name="inStock">In stock:</string>
     <string name="newOrder">New order</string>
     <string name="makeOrder">Make order</string>
+    <string name="sendNewCode">Resend code</string>
     <string-array name="cities">
         <item>Nur-Sultan</item>
         <item>Almaty</item>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,8 +30,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
     private String mVerificationID;
 
     private EditText editTextCode;
-    private TextView textViewEnterCode;
-    private Button nextButton;
+    private TextView textViewEnterCode, resendCodeTextView;
+    private Button nextButton, resendCodeButton;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private String phoneNumber;
@@ -44,7 +45,10 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         editTextCode = findViewById(R.id.editTextCode);
         textViewEnterCode = findViewById(R.id.textViewEnterCode);
+        resendCodeTextView = findViewById(R.id.resendCodeTextView);
+        resendCodeButton = findViewById(R.id.resendCodeButton);
 
+        startTimer();
 
         //getting mobile number from the previous activity
         //and sending the verification code to the number
@@ -72,6 +76,32 @@ public class VerifyPhoneActivity extends AppCompatActivity {
             }
         });
 
+        resendCodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendVerificationCode(phoneNumber);
+                startTimer();
+                resendCodeButton.setVisibility(View.INVISIBLE);
+            }
+        });
+
+    }
+
+    private void startTimer() {
+        new CountDownTimer(60000, 1000){
+
+            @Override
+            public void onTick(long l) {
+                resendCodeTextView.setText("You can resend code in " + l / 1000 + " seconds");
+            }
+
+            @Override
+            public void onFinish() {
+                resendCodeTextView.setText("");
+                resendCodeButton.setVisibility(View.VISIBLE);
+
+            }
+        }.start();
     }
 
     //the method is sending verification code

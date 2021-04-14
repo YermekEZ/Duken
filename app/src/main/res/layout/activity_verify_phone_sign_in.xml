@@ -63,4 +63,31 @@
         android:textStyle="bold"
         android:translationY="-3.15sp" />
 
+    <TextView
+        android:id="@+id/resendCodeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextCode"
+        android:layout_marginTop="32dp"
+        android:layout_centerHorizontal="true"
+        android:lineSpacingExtra="6sp"
+        android:textSize="17sp"
+        android:translationY="-2.79sp" />
+
+    <Button
+        android:id="@+id/resendCodeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sendNewCode"
+        android:textAllCaps="false"
+        android:layout_below="@id/resendCodeTextView"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/montserrat_alternates_medium"
+        android:backgroundTint="#1D59F5"
+        android:layout_marginTop="8dp"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        />
+
 </RelativeLayout>
