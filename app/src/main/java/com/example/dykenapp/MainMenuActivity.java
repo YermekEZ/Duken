@@ -38,7 +38,7 @@ public class MainMenuActivity extends AppCompatActivity {
     //private BottomNavigationView bottomNavigationView;
     private TextView scanResult, productNameResult, priceResult, inStockResult;
     private Button scanButton;
-    private ImageButton addImageButton, searchImageButton, myProfileImageButton, listImageButton;
+    private ImageButton addImageButton, searchImageButton, myProfileImageButton, listImageButton, editButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private String barcodeValue, productValue;
@@ -58,6 +58,7 @@ public class MainMenuActivity extends AppCompatActivity {
         searchImageButton = findViewById(R.id.searchImageButton);
         myProfileImageButton = findViewById(R.id.myProfileImageButton);
         listImageButton = findViewById(R.id.listImageButton);
+        editButton = findViewById(R.id.editButton);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,22 +92,12 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        /*bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        editButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.scan:
-                        Intent intent = new Intent(MainMenuActivity.this, MainMenuActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.myProfile:
-                        Intent intent2 = new Intent(MainMenuActivity.this, MyProfileActivity.class);
-                        startActivity(intent2);
-                        break;
-                }
-                return false;
+            public void onClick(View view) {
+                openDialog();
             }
-        });*/
+        });
 
     }
 
@@ -124,6 +115,10 @@ public class MainMenuActivity extends AppCompatActivity {
                 priceResult.setText(mPrice);
                 String mInStock = productData.getmPieces();
                 inStockResult.setText(mInStock);
+                SharedData.setProductName(mProductName);
+                SharedData.setBarcode(barcodeNumber);
+                SharedData.setPrice(mPrice);
+                SharedData.setPieces(mInStock);
             }
 
             @Override
@@ -131,6 +126,13 @@ public class MainMenuActivity extends AppCompatActivity {
 
             }
         });
+
+        editButton.setVisibility(View.VISIBLE);
+    }
+
+    private void openDialog() {
+        EditProductDialog editProductDialog = new EditProductDialog();
+        editProductDialog.show(getSupportFragmentManager(), "Edit product details");
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
