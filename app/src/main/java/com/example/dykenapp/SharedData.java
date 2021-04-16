@@ -4,6 +4,7 @@ public class SharedData {
 
     static String phoneNumber;
     static String productName, barcode, price, pieces;
+    static boolean isDeleted;
 
     public SharedData(){
 
@@ -47,5 +48,13 @@ public class SharedData {
 
     public static void setPieces(String pieces) {
         SharedData.pieces = pieces;
+    }
+
+    public static boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public static void setIsDeleted(boolean isDeleted) {
+        SharedData.isDeleted = isDeleted;
     }
 }

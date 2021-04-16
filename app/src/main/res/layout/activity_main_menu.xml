@@ -135,9 +135,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:layout_toLeftOf="@+id/deleteButton"
+        android:src="@drawable/ic_edit"
+        android:background="@null"
+        android:visibility="invisible"
+        />
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="24dp"
-        android:src="@drawable/ic_edit"
+        android:src="@drawable/ic_delete"
         android:background="@null"
         android:visibility="invisible"
         />

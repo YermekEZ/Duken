@@ -33,12 +33,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity implements EditProductDialog.EditProductDialogListener, DeleteProductDialog.DeleteProductDialogListener{
 
     //private BottomNavigationView bottomNavigationView;
     private TextView scanResult, productNameResult, priceResult, inStockResult;
     private Button scanButton;
-    private ImageButton addImageButton, searchImageButton, myProfileImageButton, listImageButton, editButton;
+    private ImageButton addImageButton, searchImageButton, myProfileImageButton, listImageButton, editButton, deleteButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private String barcodeValue, productValue;
@@ -59,6 +59,7 @@ public class MainMenuActivity extends AppCompatActivity {
         myProfileImageButton = findViewById(R.id.myProfileImageButton);
         listImageButton = findViewById(R.id.listImageButton);
         editButton = findViewById(R.id.editButton);
+        deleteButton = findViewById(R.id.deleteButton);
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +100,13 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteDialog();
+            }
+        });
+
     }
 
     public void readName(final String barcodeNumber) {
@@ -128,11 +136,17 @@ public class MainMenuActivity extends AppCompatActivity {
         });
 
         editButton.setVisibility(View.VISIBLE);
+        deleteButton.setVisibility(View.VISIBLE);
     }
 
     private void openDialog() {
         EditProductDialog editProductDialog = new EditProductDialog();
         editProductDialog.show(getSupportFragmentManager(), "Edit product details");
+    }
+
+    private void deleteDialog() {
+        DeleteProductDialog deleteProductDialog = new DeleteProductDialog();
+        deleteProductDialog.show(getSupportFragmentManager(), "Delete this product?");
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -153,4 +167,23 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void completeEdition() {
+        editButton.setVisibility(View.INVISIBLE);
+        deleteButton.setVisibility(View.INVISIBLE);
+        scanResult.setText("");
+        productNameResult.setText("");
+        priceResult.setText("");
+        inStockResult.setText("");
+    }
+
+    @Override
+    public void completeDelete() {
+        editButton.setVisibility(View.INVISIBLE);
+        deleteButton.setVisibility(View.INVISIBLE);
+        scanResult.setText("");
+        productNameResult.setText("");
+        priceResult.setText("");
+        inStockResult.setText("");
+    }
 }

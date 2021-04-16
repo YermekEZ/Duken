@@ -2,6 +2,7 @@ package com.example.dykenapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ public class EditProductDialog extends AppCompatDialogFragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
 
+    private EditProductDialogListener listener;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -43,8 +46,21 @@ public class EditProductDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save changes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        editData();
+                        mFirebaseDatabase = FirebaseDatabase.getInstance();
+                        mDatabaseReference = mFirebaseDatabase.getReference("products");
 
+                        String mProductName = productName.getEditText().getText().toString();
+                        String mBarcode = barcode.getEditText().getText().toString();
+                        String mPrice = price.getEditText().getText().toString();
+                        String mPieces = pieces.getEditText().getText().toString();
+
+                        ProductData addData = new ProductData(mProductName, mBarcode, mPrice, mPieces);
+
+                        mDatabaseReference.child(SharedData.getPhoneNumber()).child(SharedData.getBarcode()).setValue(addData);
+
+                        Toast.makeText(getActivity(), "Data have been saved successfully!", Toast.LENGTH_SHORT).show();
+
+                        listener.completeEdition();
                     }
                 });
 
@@ -61,19 +77,18 @@ public class EditProductDialog extends AppCompatDialogFragment {
         return builder.create();
     }
 
-    private void editData() {
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference("products");
+    public interface EditProductDialogListener{
+        void completeEdition();
+    }
 
-        String mProductName = productName.getEditText().getText().toString();
-        String mBarcode = barcode.getEditText().getText().toString();
-        String mPrice = price.getEditText().getText().toString();
-        String mPieces = pieces.getEditText().getText().toString();
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
 
-        ProductData addData = new ProductData(mProductName, mBarcode, mPrice, mPieces);
-
-        mDatabaseReference.child(SharedData.getPhoneNumber()).child(SharedData.getBarcode()).setValue(addData);
-
-        Toast.makeText(getActivity(), "Data have been saved successfully!", Toast.LENGTH_SHORT).show();
+        try {
+            listener = (EditProductDialogListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "implement interface first");
+        }
     }
 }
