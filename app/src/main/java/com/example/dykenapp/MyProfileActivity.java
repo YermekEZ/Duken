@@ -26,7 +26,7 @@ public class MyProfileActivity extends AppCompatActivity {
 
     private TextView profileDetailsTextView;
     private Button signOutButton;
-    private ImageButton listImageButton, searchImageButton, addImageButton;
+    private ImageButton listImageButton, searchImageButton, addImageButton, orderImageButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
@@ -43,6 +43,7 @@ public class MyProfileActivity extends AppCompatActivity {
         signOutButton = findViewById(R.id.signOutButton);
         searchImageButton = findViewById(R.id.searchImageButton);
         addImageButton = findViewById(R.id.addImageButton);
+        orderImageButton = findViewById(R.id.orderImageButton);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(phoneNumber);
@@ -106,6 +107,13 @@ public class MyProfileActivity extends AppCompatActivity {
             }
         });
 
+        orderImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyProfileActivity.this, OrderActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

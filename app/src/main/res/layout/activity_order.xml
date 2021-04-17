@@ -116,7 +116,7 @@
         android:id="@+id/makeOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/orderTextView"
+        android:layout_toEndOf="@id/orderTextView"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="35dp"
         android:layout_marginStart="24dp"
