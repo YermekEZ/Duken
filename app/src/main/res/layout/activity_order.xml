@@ -13,7 +13,7 @@
         android:layout_marginTop="35dp"
         android:layout_marginStart="23dp"
         android:text="@string/newOrder"
-        android:textSize="36sp"
+        android:textSize="18sp"
         android:fontFamily="@font/montserrat_alternates_medium"
         android:textColor="#201E1E"/>
 
@@ -122,9 +122,8 @@
         android:layout_marginStart="24dp"
         android:backgroundTint="#1D59F5"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textAllCaps="false"
-        android:fontFamily="@font/montserrat_alternates_medium"
-        android:text="@string/makeOrder" />
+        android:fontFamily="@font/montserrat_alternates_medium" />
 
 </RelativeLayout>

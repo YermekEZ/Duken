@@ -28,9 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity implements EnterCountDialog.EnterCountDialogListener {
 
     int numberOfProducts = 0;
+    int totalPrice = 0;
+    String scannedCode;
 
     List<ProductData> productDataList;
     ListAdapter listAdapter;
@@ -57,6 +59,8 @@ public class OrderActivity extends AppCompatActivity {
         searchImageButton = findViewById(R.id.searchImageButton);
         addImageButton = findViewById(R.id.addImageButton);
         myProfileImageButton = findViewById(R.id.myProfileImageButton);
+
+        makeOrderButton.setText("Make order for $" + totalPrice);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -117,6 +121,7 @@ public class OrderActivity extends AppCompatActivity {
                 if(data != null) {
                     Barcode barcode = data.getParcelableExtra("scannedCode");
                     String barcodeNumber = barcode.displayValue;
+                    scannedCode = barcodeNumber;
                     addProduct(barcodeNumber);
                 } else {
                     Toast.makeText(getApplicationContext(),"Product with this barcode does not exist", Toast.LENGTH_LONG).show();
@@ -136,6 +141,14 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ProductData productData = snapshot.getValue(ProductData.class);
+                String price = productData.getmPrice();
+                String pieces = productData.getmPieces();
+                int priceInt = Integer.parseInt(price);
+                int piecesInt = Integer.parseInt(pieces);
+                totalPrice += priceInt;
+                makeOrderButton.setText("Make order for $" + totalPrice);
+                SharedData.setMaxCount(piecesInt);
+                productData.setmPieces("1");
                 productDataList.add(productData);
                 listAdapter = new ListAdapter(productDataList);
                 recyclerView.setAdapter(listAdapter);
@@ -145,6 +158,9 @@ public class OrderActivity extends AppCompatActivity {
                 } else {
                     numberOfProductsTextView.setText(numberOfProducts + " products");
                 }
+
+                openDialog();
+
             }
 
             @Override
@@ -153,5 +169,43 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void openDialog() {
+        EnterCountDialog enterCountDialog = new EnterCountDialog();
+        enterCountDialog.show(getSupportFragmentManager(), "Enter number of products");
+    }
+
+    @Override
+    public void setCount(final String pieces) {
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference();
+
+        mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(scannedCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ProductData productData = snapshot.getValue(ProductData.class);
+                productDataList.remove(productDataList.size() - 1);
+                productData.setmPieces(pieces);
+                int price = Integer.parseInt(productData.getmPrice());
+                totalPrice += price * (Integer.parseInt(pieces) - 1);
+                makeOrderButton.setText("Make order for $" + totalPrice);
+                productDataList.add(productData);
+                listAdapter = new ListAdapter(productDataList);
+                recyclerView.setAdapter(listAdapter);
+                numberOfProducts = productDataList.size();
+                if(numberOfProducts == 1){
+                    numberOfProductsTextView.setText(numberOfProducts + " product");
+                } else {
+                    numberOfProductsTextView.setText(numberOfProducts + " products");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

@@ -4,7 +4,7 @@ public class SharedData {
 
     static String phoneNumber;
     static String productName, barcode, price, pieces;
-    static boolean isDeleted;
+    static int maxCount;
 
     public SharedData(){
 
@@ -50,11 +50,11 @@ public class SharedData {
         SharedData.pieces = pieces;
     }
 
-    public static boolean isIsDeleted() {
-        return isDeleted;
+    public static int getMaxCount() {
+        return maxCount;
     }
 
-    public static void setIsDeleted(boolean isDeleted) {
-        SharedData.isDeleted = isDeleted;
+    public static void setMaxCount(int maxCount) {
+        SharedData.maxCount = maxCount;
     }
 }
