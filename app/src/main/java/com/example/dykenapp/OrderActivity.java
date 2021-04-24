@@ -32,7 +32,9 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
 
     int numberOfProducts = 0;
     int totalPrice = 0;
+    int priceForOne = 0;
     String scannedCode;
+    boolean exist = false;
 
     List<ProductData> productDataList;
     ListAdapter listAdapter;
@@ -113,6 +115,14 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
                 startActivityForResult(intent, 0);
             }
         });
+
+        makeOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                mDatabaseReference = mFirebaseDatabase.getReference("products");
+            }
+        });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -120,9 +130,10 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
             if(resultCode == CommonStatusCodes.SUCCESS) {
                 if(data != null) {
                     Barcode barcode = data.getParcelableExtra("scannedCode");
-                    String barcodeNumber = barcode.displayValue;
+                    final String barcodeNumber = barcode.displayValue;
+                    SharedData.setBarcode(barcodeNumber);
                     scannedCode = barcodeNumber;
-                    addProduct(barcodeNumber);
+                    doesExist(barcodeNumber);
                 } else {
                     Toast.makeText(getApplicationContext(),"Product with this barcode does not exist", Toast.LENGTH_LONG).show();
                 }
@@ -133,36 +144,74 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
         }
     }
 
-    private void addProduct(String barcodeNumber) {
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference();
+    private void doesExist(String barcodeNumber) {
 
         mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(barcodeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ProductData productData = snapshot.getValue(ProductData.class);
-                String price = productData.getmPrice();
-                String pieces = productData.getmPieces();
-                int priceInt = Integer.parseInt(price);
-                int piecesInt = Integer.parseInt(pieces);
-                totalPrice += priceInt;
-                makeOrderButton.setText("Make order for $" + totalPrice);
-                SharedData.setMaxCount(piecesInt);
-                productData.setmPieces("1");
-                productDataList.add(productData);
-                listAdapter = new ListAdapter(productDataList);
-                recyclerView.setAdapter(listAdapter);
-                numberOfProducts = productDataList.size();
-                if(numberOfProducts == 1){
-                    numberOfProductsTextView.setText(numberOfProducts + " product");
-                } else {
-                    numberOfProductsTextView.setText(numberOfProducts + " products");
-                }
-
-                openDialog();
-
+                priceForOne = Integer.parseInt(productData.getmPrice());
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        if(productDataList.isEmpty()){
+            mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(barcodeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ProductData productData = snapshot.getValue(ProductData.class);
+                    SharedData.setMaxCount(Integer.parseInt(productData.getmPieces()));
+                    openDialog();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else {
+            for(final ProductData productData: productDataList){
+                if(productData.getmBarcodeNumber().equals(barcodeNumber)) {
+                    exist = true;
+                    countSetter(productData);
+                    return;
+                }
+            }
+            newProduct();
+        }
+
+    }
+
+    private void newProduct() {
+        mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(scannedCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ProductData productData = snapshot.getValue(ProductData.class);
+                SharedData.setMaxCount(Integer.parseInt(productData.getmPieces()));
+                openDialog();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void countSetter(final ProductData productData) {
+        mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(scannedCode).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ProductData productData1 = snapshot.getValue(ProductData.class);
+                int totalPieces = Integer.parseInt(productData1.getmPieces());
+                int currentPieces = Integer.parseInt(productData.getmPieces());
+                SharedData.setMaxCount(totalPieces - currentPieces);
+                openDialog();
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -178,34 +227,51 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
 
     @Override
     public void setCount(final String pieces) {
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFirebaseDatabase.getReference();
-
-        mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(scannedCode).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ProductData productData = snapshot.getValue(ProductData.class);
-                productDataList.remove(productDataList.size() - 1);
-                productData.setmPieces(pieces);
-                int price = Integer.parseInt(productData.getmPrice());
-                totalPrice += price * (Integer.parseInt(pieces) - 1);
-                makeOrderButton.setText("Make order for $" + totalPrice);
-                productDataList.add(productData);
-                listAdapter = new ListAdapter(productDataList);
-                recyclerView.setAdapter(listAdapter);
-                numberOfProducts = productDataList.size();
-                if(numberOfProducts == 1){
-                    numberOfProductsTextView.setText(numberOfProducts + " product");
-                } else {
-                    numberOfProductsTextView.setText(numberOfProducts + " products");
+        if(exist == true) {
+            for(ProductData productData: productDataList) {
+                if(scannedCode.equals(productData.getmBarcodeNumber())) {
+                    int curPieces = Integer.parseInt(productData.getmPieces());
+                    int piecesToAdd = Integer.parseInt(pieces);
+                    productData.setmPieces(Integer.toString(curPieces + piecesToAdd));
+                    productData.setmPrice(Integer.toString(priceForOne * (curPieces + piecesToAdd)));
+                    totalPrice -= priceForOne * curPieces;
+                    totalPrice += priceForOne * (curPieces + piecesToAdd);
+                    makeOrderButton.setText("Make order for $" + totalPrice);
+                    listAdapter = new ListAdapter(productDataList);
+                    recyclerView.setAdapter(listAdapter);
+                    exist = false;
+                }
+            }
+        } else {
+            mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(scannedCode).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ProductData productData = snapshot.getValue(ProductData.class);
+                    productData.setmPieces(pieces);
+                    int piecesInt = Integer.parseInt(pieces);
+                    String tPrice = Integer.toString(priceForOne * piecesInt);
+                    productData.setmPrice(tPrice);
+                    totalPrice += priceForOne * Integer.parseInt(pieces);
+                    makeOrderButton.setText("Make order for $" + totalPrice);
+                    productDataList.add(productData);
+                    listAdapter = new ListAdapter(productDataList);
+                    recyclerView.setAdapter(listAdapter);
+                    numberOfProducts = productDataList.size();
+                    if(numberOfProducts == 1){
+                        numberOfProductsTextView.setText(numberOfProducts + " product");
+                    } else {
+                        numberOfProductsTextView.setText(numberOfProducts + " products");
+                    }
+                    exist = false;
                 }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
 
-            }
-        });
     }
+
 }
