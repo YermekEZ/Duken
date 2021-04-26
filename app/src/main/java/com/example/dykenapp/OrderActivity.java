@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderActivity extends AppCompatActivity implements EnterCountDialog.EnterCountDialogListener {
+public class OrderActivity extends AppCompatActivity implements EnterCountDialog.EnterCountDialogListener, OrderListAdapter.OnItemClick {
 
     int numberOfProducts = 0;
     int totalPrice = 0;
@@ -37,7 +37,7 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
     boolean exist = false;
 
     List<ProductData> productDataList;
-    ListAdapter listAdapter;
+    OrderListAdapter listAdapter;
 
     private TextView numberOfProductsTextView;
     private RecyclerView recyclerView;
@@ -71,7 +71,7 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
         recyclerView.addItemDecoration(itemDecorator);
         productDataList = new ArrayList<>();
 
-        listAdapter = new ListAdapter(productDataList);
+        listAdapter = new OrderListAdapter(productDataList, this);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference();
@@ -237,7 +237,6 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
                     totalPrice -= priceForOne * curPieces;
                     totalPrice += priceForOne * (curPieces + piecesToAdd);
                     makeOrderButton.setText("Make order for $" + totalPrice);
-                    listAdapter = new ListAdapter(productDataList);
                     recyclerView.setAdapter(listAdapter);
                     exist = false;
                 }
@@ -254,7 +253,6 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
                     totalPrice += priceForOne * Integer.parseInt(pieces);
                     makeOrderButton.setText("Make order for $" + totalPrice);
                     productDataList.add(productData);
-                    listAdapter = new ListAdapter(productDataList);
                     recyclerView.setAdapter(listAdapter);
                     numberOfProducts = productDataList.size();
                     if(numberOfProducts == 1){
@@ -274,4 +272,15 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
 
     }
 
+
+    @Override
+    public void onDelete(int position) {
+        int price = Integer.parseInt(productDataList.get(position).getmPrice());
+        totalPrice = totalPrice - price;
+        productDataList.remove(position);
+        makeOrderButton.setText("Make order for $" + totalPrice);
+        numberOfProducts = productDataList.size();
+        numberOfProductsTextView.setText(numberOfProducts + " products");
+        listAdapter.notifyItemRemoved(position);
+    }
 }
