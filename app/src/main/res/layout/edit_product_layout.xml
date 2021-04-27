@@ -52,7 +52,8 @@
             android:id="@+id/priceEditText"
             android:fontFamily="@font/montserrat_alternates_medium"
             android:textSize="16sp"
-            android:hint="@string/price" />
+            android:hint="@string/price"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -70,7 +71,8 @@
             android:id="@+id/piecesEditText"
             android:fontFamily="@font/montserrat_alternates_medium"
             android:textSize="16sp"
-            android:hint="@string/pieces" />
+            android:hint="@string/pieces"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 

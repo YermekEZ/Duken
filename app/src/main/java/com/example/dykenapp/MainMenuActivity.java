@@ -38,7 +38,7 @@ public class MainMenuActivity extends AppCompatActivity implements EditProductDi
     //private BottomNavigationView bottomNavigationView;
     private TextView scanResult, productNameResult, priceResult, inStockResult;
     private Button scanButton;
-    private ImageButton addImageButton, searchImageButton, myProfileImageButton, listImageButton, editButton, deleteButton;
+    private ImageButton addImageButton, searchImageButton, myProfileImageButton, listImageButton, orderImageButton, editButton, deleteButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private String barcodeValue, productValue;
@@ -58,6 +58,7 @@ public class MainMenuActivity extends AppCompatActivity implements EditProductDi
         searchImageButton = findViewById(R.id.searchImageButton);
         myProfileImageButton = findViewById(R.id.myProfileImageButton);
         listImageButton = findViewById(R.id.listImageButton);
+        orderImageButton = findViewById(R.id.orderImageButton);
         editButton = findViewById(R.id.editButton);
         deleteButton = findViewById(R.id.deleteButton);
 
@@ -89,6 +90,14 @@ public class MainMenuActivity extends AppCompatActivity implements EditProductDi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainMenuActivity.this, ProductListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        orderImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuActivity.this, OrderActivity.class);
                 startActivity(intent);
             }
         });

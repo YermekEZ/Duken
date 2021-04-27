@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".ProductListActivity">
 
     <TextView
@@ -17,13 +20,26 @@
         android:fontFamily="@font/montserrat_alternates_medium"
         android:textColor="#201E1E"/>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchEditText"
+        android:layout_below="@id/listTextView"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:drawableLeft="@drawable/ic_search_black_24"
+        android:background="@drawable/search_rounded_layout"
+        android:hint="@string/search"
+        android:fontFamily="@font/montserrat_alternates_medium"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/numberOfProductsTextView"
         android:layout_marginStart="30dp"
         android:layout_marginTop="24dp"
-        android:layout_below="@id/listTextView"
+        android:layout_below="@id/searchEditText"
         android:textSize="12sp"
         android:fontFamily="@font/montserrat_alternates_medium"
         android:textAllCaps="true"/>
@@ -49,7 +65,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_list"
                     android:background="@null"
                     android:id="@+id/listImageButton"/>
@@ -57,7 +73,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_search"
                     android:background="@null"
                     android:id="@+id/searchImageButton"/>
@@ -65,7 +81,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_add"
                     android:background="@null"
                     android:id="@+id/addImageButton"/>
@@ -73,7 +89,15 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
+                    android:src="@drawable/ic_shopping"
+                    android:background="@null"
+                    android:id="@+id/orderImageButton"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_account_circle"
                     android:background="@null"
                     android:id="@+id/myProfileImageButton"/>

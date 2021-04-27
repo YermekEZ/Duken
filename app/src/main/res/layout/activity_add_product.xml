@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".AddProductActivity">
 
     <!--<com.google.android.material.bottomnavigation.BottomNavigationView
@@ -37,7 +38,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_list"
                     android:background="@null"
                     android:id="@+id/listImageButton"/>
@@ -45,7 +46,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_search"
                     android:background="@null"
                     android:id="@+id/scanImageButton"/>
@@ -53,7 +54,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_add"
                     android:background="@null"
                     android:id="@+id/addImageButton"/>
@@ -61,7 +62,15 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="25"
+                    android:layout_weight="20"
+                    android:src="@drawable/ic_shopping"
+                    android:background="@null"
+                    android:id="@+id/orderImageButton"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
                     android:src="@drawable/ic_account_circle"
                     android:background="@null"
                     android:id="@+id/myProfileImageButton"/>

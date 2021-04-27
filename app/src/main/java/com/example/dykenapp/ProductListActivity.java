@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -29,9 +32,10 @@ public class ProductListActivity extends AppCompatActivity {
 
     int numberOfProducts = 0;
 
-    private ImageButton searchImageButton, addImageButton, myProfileImageButton;
+    private ImageButton searchImageButton, addImageButton, myProfileImageButton, orderImageButton;
     private TextView numberOfProductsTextView;
     private RecyclerView recyclerView;
+    private EditText searchEditText;
     List<ProductData> productDataList;
     ListAdapter listAdapter;
     private FirebaseDatabase mFirebaseDatabase;
@@ -45,7 +49,9 @@ public class ProductListActivity extends AppCompatActivity {
         searchImageButton = findViewById(R.id.searchImageButton);
         addImageButton = findViewById(R.id.addImageButton);
         myProfileImageButton = findViewById(R.id.myProfileImageButton);
+        orderImageButton = findViewById(R.id.orderImageButton);
         numberOfProductsTextView = findViewById(R.id.numberOfProductsTextView);
+        searchEditText = findViewById(R.id.searchEditText);
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setHasFixedSize(true);
@@ -82,6 +88,23 @@ public class ProductListActivity extends AppCompatActivity {
             }
         });
 
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
+
         searchImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,5 +128,30 @@ public class ProductListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        orderImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductListActivity.this, OrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+    private void filter(String text) {
+        List<ProductData> filteredList = new ArrayList<>();
+        for(ProductData productData: productDataList){
+            if(productData.getmProductName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(productData);
+            }
+        }
+        numberOfProducts = filteredList.size();
+        if(numberOfProducts == 1){
+            numberOfProductsTextView.setText(numberOfProducts + " product");
+        } else {
+            numberOfProductsTextView.setText(numberOfProducts + " products");
+        }
+        listAdapter.filtered(filteredList);
+    }
+
 }

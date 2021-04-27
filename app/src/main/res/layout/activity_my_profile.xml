@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MyProfileActivity">
 
     <TextView
@@ -33,13 +34,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/signOutButton"
         android:text="@string/signOut"
-        android:layout_below="@id/profileDetails"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
         android:backgroundTint="#1D59F5"
         android:textColor="#FFFFFF"
         android:textAllCaps="false"
         android:fontFamily="@font/montserrat_alternates_medium"
         android:layout_centerHorizontal="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+        android:layout_above="@id/topBar"
+        android:layout_below="@id/profileDetails"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

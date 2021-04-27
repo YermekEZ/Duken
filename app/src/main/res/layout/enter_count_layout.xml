@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/enterCountEditText"
             android:fontFamily="@font/montserrat_alternates_medium"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 </RelativeLayout>

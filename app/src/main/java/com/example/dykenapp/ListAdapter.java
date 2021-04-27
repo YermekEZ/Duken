@@ -1,6 +1,5 @@
 package com.example.dykenapp;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter {
@@ -45,6 +45,11 @@ public class ListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return addProductData.size();
+    }
+
+    public void filtered(List<ProductData> filteredList) {
+        addProductData = filteredList;
+        notifyDataSetChanged();
     }
 
     public class ViewHolderClass extends RecyclerView.ViewHolder{

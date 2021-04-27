@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".AddStoreActivity">
 
     <TextView
@@ -37,6 +38,7 @@
             android:id="@+id/IINEditText"
             android:textSize="17sp"
             android:fontFamily="@font/roboto_medium"
+            android:inputType="number"
             android:hint="@string/IIN" />
     </com.google.android.material.textfield.TextInputLayout>
 
