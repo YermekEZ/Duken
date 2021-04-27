@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class OrderActivity extends AppCompatActivity implements EnterCountDialog.EnterCountDialogListener, OrderListAdapter.OnItemClick {
@@ -44,6 +48,7 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
     private FloatingActionButton addProductFloatingButton;
     private Button makeOrderButton;
     private ImageButton listImageButton, searchImageButton, addImageButton, myProfileImageButton;
+    private ProgressBar progressBar;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -61,6 +66,7 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
         searchImageButton = findViewById(R.id.searchImageButton);
         addImageButton = findViewById(R.id.addImageButton);
         myProfileImageButton = findViewById(R.id.myProfileImageButton);
+        progressBar = findViewById(R.id.progress_circular);
 
         makeOrderButton.setText("Make order for $" + totalPrice);
 
@@ -119,9 +125,49 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
         makeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mFirebaseDatabase = FirebaseDatabase.getInstance();
-                mDatabaseReference = mFirebaseDatabase.getReference("products");
+                progressBar.setVisibility(View.VISIBLE);
+                SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy HH:mm:ss");
+                Date date = new Date();
+                String currentDate = formatter.format(date);
+
+                mDatabaseReference.child("orders").child(SharedData.getPhoneNumber()).child(currentDate).child("mTotalPrice").setValue(totalPrice);
+                for(int i = 0; i < productDataList.size(); i++) {
+                    final String barcode = productDataList.get(i).getmBarcodeNumber();
+                    String name = productDataList.get(i).getmProductName();
+                    String price = productDataList.get(i).getmPrice();
+                    final String pieces = productDataList.get(i).getmPieces();
+
+                    OrderData orderData = new OrderData(name, price, pieces);
+                    mDatabaseReference.child("orders").child(SharedData.getPhoneNumber()).child(currentDate).child("products")
+                            .child(barcode).setValue(orderData);
+
+                    mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(barcode)
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    ProductData productData = snapshot.getValue(ProductData.class);
+                                    int maxPieces = Integer.parseInt(productData.getmPieces());
+                                    maxPieces = maxPieces - Integer.parseInt(pieces);
+                                    mDatabaseReference.child("products").child(SharedData.getPhoneNumber())
+                                            .child(barcode).child("mPieces").setValue(Integer.toString(maxPieces));
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                }
+                productDataList.clear();
+                recyclerView.setAdapter(listAdapter);
+                numberOfProducts = 0;
+                numberOfProductsTextView.setText(numberOfProducts + " products");
+                totalPrice = 0;
+                makeOrderButton.setText("Make order for $" + totalPrice);
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getApplicationContext(), "Order has been saved successfully!", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 
@@ -144,7 +190,7 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
         }
     }
 
-    private void doesExist(String barcodeNumber) {
+    private void doesExist(final String barcodeNumber) {
 
         mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(barcodeNumber).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
