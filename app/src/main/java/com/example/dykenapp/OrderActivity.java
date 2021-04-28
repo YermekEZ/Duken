@@ -126,11 +126,13 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-                SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy HH:mm:ss");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 Date date = new Date();
                 String currentDate = formatter.format(date);
 
-                mDatabaseReference.child("orders").child(SharedData.getPhoneNumber()).child(currentDate).child("mTotalPrice").setValue(totalPrice);
+                OrderHistoryData orderHistoryData = new OrderHistoryData(currentDate, Integer.toString(totalPrice));
+                mDatabaseReference.child("orders").child(SharedData.getPhoneNumber()).child(currentDate).setValue(orderHistoryData);
+
                 for(int i = 0; i < productDataList.size(); i++) {
                     final String barcode = productDataList.get(i).getmBarcodeNumber();
                     String name = productDataList.get(i).getmProductName();
@@ -138,7 +140,7 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
                     final String pieces = productDataList.get(i).getmPieces();
 
                     OrderData orderData = new OrderData(name, price, pieces);
-                    mDatabaseReference.child("orders").child(SharedData.getPhoneNumber()).child(currentDate).child("products")
+                    mDatabaseReference.child("orderDetails").child(SharedData.getPhoneNumber()).child(currentDate).child("products")
                             .child(barcode).setValue(orderData);
 
                     mDatabaseReference.child("products").child(SharedData.getPhoneNumber()).child(barcode)

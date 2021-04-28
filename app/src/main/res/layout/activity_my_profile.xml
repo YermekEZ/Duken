@@ -17,7 +17,7 @@
         android:layout_marginStart="23dp"
         android:textSize="18sp"
         android:textColor="#201E1E"
-    />
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,25 +32,26 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/signOutButton"
-        android:text="@string/signOut"
-        android:layout_alignParentEnd="true"
+        android:id="@+id/orderHistoryButton"
+        android:text="@string/orderHistory"
+        android:layout_below="@id/profileDetails"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
+        android:layout_centerInParent="true"
         android:backgroundTint="#1D59F5"
         android:textColor="#FFFFFF"
         android:textAllCaps="false"
         android:fontFamily="@font/montserrat_alternates_medium"
         android:layout_centerHorizontal="true"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:layout_above="@id/topBar"
-        android:layout_below="@id/profileDetails"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signOutImageButton"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_exit"
+        android:background="@null"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="24dp"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

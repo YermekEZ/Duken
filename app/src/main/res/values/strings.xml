@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DykenApp</string>
+    <string name="app_name">DukenApp</string>
     <string name="enterPhone">Enter your phone number</string>
     <string name="nextButton">Next</string>
     <string name="confirmCode">Enter confirmation code</string>
@@ -16,7 +16,7 @@
     <string name="welcome">Welcome to Duken</string>
     <string name="signIn">Sign in</string>
     <string name="signUp">Sign up</string>
-    <string name="signOut">Sign out</string>
+    <string name="orderHistory">Order history</string>
     <string name="scannedCode">Scan result: </string>
     <string name="scanNow">Scan</string>
     <string name="addProduct">Add product</string>

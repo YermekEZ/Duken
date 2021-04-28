@@ -25,8 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 public class MyProfileActivity extends AppCompatActivity {
 
     private TextView profileDetailsTextView;
-    private Button signOutButton;
-    private ImageButton listImageButton, searchImageButton, addImageButton, orderImageButton;
+    private Button orderHistoryButton;
+    private ImageButton listImageButton, searchImageButton, addImageButton, orderImageButton, signOutImageButton;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
@@ -40,10 +40,11 @@ public class MyProfileActivity extends AppCompatActivity {
 
         profileDetailsTextView = findViewById(R.id.profileDetails);
         listImageButton = findViewById(R.id.listImageButton);
-        signOutButton = findViewById(R.id.signOutButton);
+        orderHistoryButton = findViewById(R.id.orderHistoryButton);
         searchImageButton = findViewById(R.id.searchImageButton);
         addImageButton = findViewById(R.id.addImageButton);
         orderImageButton = findViewById(R.id.orderImageButton);
+        signOutImageButton = findViewById(R.id.signOutImageButton);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("users").child(phoneNumber);
@@ -53,7 +54,7 @@ public class MyProfileActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() == null){
                     Intent intent = new Intent(MyProfileActivity.this, FirstActivity.class);
-                    Toast toast = Toast.makeText(getApplicationContext(), "You have successfully signed out", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "You have successfully signed out", Toast.LENGTH_LONG).show();
                     startActivity(intent);
                 }
             }
@@ -76,10 +77,18 @@ public class MyProfileActivity extends AppCompatActivity {
             }
         });
 
-        signOutButton.setOnClickListener(new View.OnClickListener() {
+        signOutImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mFirebaseAuth.signOut();
+            }
+        });
+
+        orderHistoryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyProfileActivity.this, OrderHistoryActivity.class);
+                startActivity(intent);
             }
         });
 

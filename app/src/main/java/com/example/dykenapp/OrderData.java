@@ -6,6 +6,9 @@ public class OrderData {
 
     String mName, mPrice, mPieces;
 
+    public OrderData() {
+    }
+
     public OrderData(String mName, String mPieces, String mPrice) {
         this.mName = mName;
         this.mPrice = mPrice;
