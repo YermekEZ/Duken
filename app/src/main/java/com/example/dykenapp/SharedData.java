@@ -3,7 +3,7 @@ package com.example.dykenapp;
 public class SharedData {
 
     static String phoneNumber;
-    static String productName, barcode, price, pieces;
+    static String productName, barcode, price, pieces, date;
     static int maxCount;
 
     public SharedData(){
@@ -58,4 +58,11 @@ public class SharedData {
         SharedData.maxCount = maxCount;
     }
 
+    public static String getDate() {
+        return date;
+    }
+
+    public static void setDate(String date) {
+        SharedData.date = date;
+    }
 }

@@ -97,6 +97,11 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderHist
 
     @Override
     public void getDetails(int position) {
-        Toast.makeText(getApplicationContext(), "Details ImageButton clicked", Toast.LENGTH_SHORT).show();
+        SharedData.setDate(orderHistoryDataList.get(position).getmDate());
+        /*Intent intent = new Intent(OrderHistoryActivity.this, OrderDetailsActivity.class);
+        startActivity(intent);*/
+        OrderDetailsDialog orderDetailsDialog = new OrderDetailsDialog();
+        orderDetailsDialog.show(getSupportFragmentManager(), "Order details");
     }
+
 }

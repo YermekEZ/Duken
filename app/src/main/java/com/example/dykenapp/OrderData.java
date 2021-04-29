@@ -9,7 +9,7 @@ public class OrderData {
     public OrderData() {
     }
 
-    public OrderData(String mName, String mPieces, String mPrice) {
+    public OrderData(String mName, String mPrice, String mPieces) {
         this.mName = mName;
         this.mPrice = mPrice;
         this.mPieces = mPieces;

@@ -126,6 +126,11 @@ public class OrderActivity extends AppCompatActivity implements EnterCountDialog
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
+                if(numberOfProducts == 0){
+                    Toast.makeText(getApplicationContext(), "First add products!", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.INVISIBLE);
+                    return;
+                }
                 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 Date date = new Date();
                 String currentDate = formatter.format(date);
